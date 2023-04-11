@@ -21,3 +21,4 @@ ax.plot(x,y)
 ax.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
 plt.show()
 #testing if the commits worked properly
+#testing if access works from Lenovo
