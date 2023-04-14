@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 ticker = input('Enter ticker: \n')
-all_data = pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv')
+# for windows os: all_data = pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv')
+all_data = pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv')
 open = list(all_data['Open'])
 close = list(all_data['Close'])
 high = list(all_data['High'])

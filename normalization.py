@@ -5,7 +5,9 @@ def normalizer(means_array,std_array,x_array,ticker):
     #x_array is the full 5 by _____ list in the form [[Opens],[Closes],[Highs],[Lows]]
     #we are not normalizing dates so in the loops below, we only use the first 4 values of this list  (Opens, Closes, Highs, Lows)
     #ticker is the ticker that this method needs to normalize
-    normalizedFile = open('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv','w')
+
+    #for windows os: normalizedFile = open('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv','w')
+    normalizedFile = open('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv','w')
     #open the normalized csv file
     normalizedFile.write('Open,Close,High,Low\n')
     #write headers
@@ -35,7 +37,9 @@ means = {}
 stdevs = {}
 for tick in tickers:
     #iterating through tickers to populate means and stdevs dictionaries
-    data = np.transpose(np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+tick+".csv")))
+
+    #for windows os: data = np.transpose(np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+tick+".csv")))
+    data = np.transpose(np.array(pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+tick+".csv")))
     #getting data and transposing to make each element a column; this allows us to feed into normalizer method
     aux_mean = []
     aux_std = []
@@ -50,6 +54,9 @@ for tick in tickers:
 print(means)
 print(stdevs)
 for tick in tickers:
-    data = np.transpose(np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+tick+".csv")))
+    #for windows os: data = np.transpose(np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+tick+".csv")))
+    data = np.transpose(np.array(pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+tick+".csv")))
     normalizer(means[tick],stdevs[tick],data,tick)
     #using normalizer method to create normalized csv files
+
+    

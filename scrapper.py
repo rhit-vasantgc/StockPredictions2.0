@@ -41,7 +41,8 @@ for obj in stock_details:
 print(urls)
 print()
 print(tickers)
-tickerFile = open('C://Users//vasantgc//Documents//StockPredictions2.0//tickers.csv','w')
+#for windows os: tickerFile = open('C://Users//vasantgc//Documents//StockPredictions2.0//tickers.csv','w')
+tickerFile = open('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/tickers.csv','w')
 tickerFile.write('Tickers\n')
 for ticker in tickers:
     tickerFile.write(ticker+'\n')
@@ -94,7 +95,8 @@ tickerToLink = dict(zip(tickers,fullLinks))
 for ticks in tickerToLink:
     #actually reads the raw numbers in the requested data files
     dataToRead = (requests.get(tickerToLink[ticks]).json())
-    fOpen = open('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+ticks+".csv",'w')
+    #for windows os: fOpen = open('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+ticks+".csv",'w')
+    fOpen = open('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+ticks+".csv",'w')
     fOpen.write("Open,Close,High,Low,Date\n") 
     #writes the Open, Close, High, Low, Date fields to the corresponding .csv file (appl.csv for example)
     #excludes the Volume field because the values in this column are inconsistent and the commas mess up the csv file (adds extra columns for commas)
