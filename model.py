@@ -7,9 +7,13 @@ import matplotlib.ticker as tickster
 
 all_tickers = pd.read_csv('tickers.csv')['Tickers']
 for ticker in all_tickers:
-    # for windows os: all_data = pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv')
-    all_data = pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv')
-    date_data = pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+ticker+'.csv')['Date']
+    # for windows os: 
+    all_data = pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv')
+    # all_data = pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv')
+    
+    date_data = pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+ticker+'.csv')['Date']
+    # date_data = pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+ticker+'.csv')['Date']
+
     open = list(all_data['Open'])
     close = list(all_data['Close'])
     high = list(all_data['High'])
