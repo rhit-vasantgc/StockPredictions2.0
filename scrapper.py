@@ -78,6 +78,7 @@ fullLinks = []
 
 for i in range(len(allIds)):
     print(month)
+    print(allIds[i])
     ooga = str(requests.get('https://markets.businessinsider.com/ajax/Valor_HistoricPriceList/'+str(allIds[i])+'/Jan.%2001%202000_'+month+'.%20'+day+'%2020'+yearPart+'/NDB').json)
 
     if(int(ooga[len(ooga)-6:len(ooga)-3])==200):#means its a valid request
@@ -102,6 +103,9 @@ for ticks in tickerToLink:
     fOpen.write("Open,Close,High,Low,Date\n") 
     #writes the Open, Close, High, Low, Date fields to the corresponding .csv file (appl.csv for example)
     #excludes the Volume field because the values in this column are inconsistent and the commas mess up the csv file (adds extra columns for commas)
-    for j in range(len(dataToRead)):
+    # descending order (most recent at the EOF) 
+    for j in range(len(dataToRead)-1,-1,-1):
+    # for j in range(len(dataToRead)):
             fOpen.write(str(dataToRead[j]['Open'])+','+str(dataToRead[j]['Close'])+','+str(dataToRead[j]['High'])+','+str(dataToRead[j]['Low'])+','+str(dataToRead[j]['Date'])+'\n')
 #volumes get messed up because they have columns so it stretches across 3 columns in the csv file; also most of the volumes aren't even filled out
+#so the volumes column was deleted

@@ -18,10 +18,10 @@ for ticker in all_tickers:
     close = list(all_data['Close'])
     high = list(all_data['High'])
     low = list(all_data['Low'])
-    open.reverse()
-    close.reverse()
-    high.reverse()
-    low.reverse()
+    # open.reverse()
+    # close.reverse()
+    # high.reverse()
+    # low.reverse()
     train_x = []
     train_y = []
     #5 days in advance
@@ -51,7 +51,7 @@ for ticker in all_tickers:
     print(train_y[0])
     print(train_y.shape)
     print(all_data)
-
+    # input('stop')
     tick_spacing = 100
     y_axis = []
     for i in range(len(train_x)):
@@ -61,5 +61,7 @@ for ticker in all_tickers:
     ax.plot(date_data,open)
     ax.xaxis.set_major_locator(tickster.MultipleLocator(tick_spacing))
     plt.title(ticker)
-    plt.savefig('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/graphs/'+ticker+'.png')
+    #for windows os: 
+    plt.savefig('C://Users//vasantgc//Documents//StockPredictions2.0//graphs/'+ticker+'.png')
+    #plt.savefig('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/graphs/'+ticker+'.png')
     plt.show()

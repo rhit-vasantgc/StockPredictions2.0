@@ -6,8 +6,9 @@ def normalizer(means_array,std_array,x_array,ticker):
     #we are not normalizing dates so in the loops below, we only use the first 4 values of this list  (Opens, Closes, Highs, Lows)
     #ticker is the ticker that this method needs to normalize
 
-    #for windows os: normalizedFile = open('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv','w')
-    normalizedFile = open('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv','w')
+    #for windows os: 
+    normalizedFile = open('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv','w')
+    #normalizedFile = open('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv','w')
     #open the normalized csv file
     normalizedFile.write('Open,Close,High,Low\n')
     #write headers
