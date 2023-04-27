@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-data = np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_wba.csv'))
+data = np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_mmm.csv'))
 #a positive difference is when the current value is bigger than the previous value
 #a negative difference is when the current value is smaller than the previous value
 
