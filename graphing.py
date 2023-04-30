@@ -64,4 +64,4 @@ for ticker in all_tickers:
     #for windows os: 
     plt.savefig('C://Users//vasantgc//Documents//StockPredictions2.0//graphs/'+ticker+'.png')
     #plt.savefig('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/graphs/'+ticker+'.png')
-    plt.show()
+    #plt.show()

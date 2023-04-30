@@ -8,3 +8,4 @@ import subprocess
 subprocess.run(["python","scrapper.py"])
 subprocess.run(["python","normalization.py"])
 subprocess.run(["python","norm_diff.py"])
+subprocess.run(["python","graphing.py"])
