@@ -18,8 +18,7 @@ targetDate = str(input('Enter date in the format YYYY-MM-DD:\nFor example, today
 month = numberToMonthMap[targetDate[1]]
 day = targetDate[2]
 yearPart = targetDate[0][2:4]
-#2023-03-17 is an example input
-
+#2023-03-17  is an example input
 html = requests.get('https://markets.businessinsider.com/index/dow_jones').text
 souped = BeautifulSoup(html,'html.parser')
 
