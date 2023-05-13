@@ -1,0 +1,33 @@
+import pandas as pd
+import numpy as np
+# z times standard dev + mu
+def denormalizer(rawX,meansArr,stdevArr):
+    output = []
+    for i in range(len(rawX)):
+        output.append((rawX[i]*stdevArr[i])+meansArr[i])
+    return output
+
+ticks = list(pd.read_csv('tickers.csv')['Tickers'])
+print(ticks)
+# input(ticks.index('aapl'))
+for i in range(len(ticks)):
+    valLen = len(np.array(pd.read_csv('raw_future_predictions//'+ticks[i]+'.csv')))
+    means = np.array((pd.read_csv('means.csv')).transpose()[i][1:5])
+    stdevs = np.array(pd.read_csv('stdevs.csv').transpose()[i][1:5])
+    # input(valLen)
+    writeFile = open('denormalized_future_predictions//'+ticks[i]+'.csv','w')
+    writeFile.write("Open,Close,High,Low\n")
+    for j in range(valLen):
+        print(j)
+        print(ticks[i])
+        values = np.array(pd.read_csv('raw_future_predictions//'+ticks[i]+'.csv').transpose()[j])
+        # for value in values:
+        # print(means)
+        # print(stdevs)
+        print(values)
+        # input('stop')
+        acc = denormalizer(values,means,stdevs)
+        print(acc)
+        writeFile.write(str(acc[0])+','+str(acc[1])+','+str(acc[2])+','+str(acc[3])+'\n')
+    # writeFile.write((str(denormalizer(values,means,stdevs))))
+# print(values)

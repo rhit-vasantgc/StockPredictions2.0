@@ -12,28 +12,29 @@ from tensorflow.keras.backend import sigmoid
 from tensorflow.keras.utils import get_custom_objects
 from tensorflow.keras.layers import Activation
 import tensorflow as tf
+import subprocess
 
 
 
 def swish(x, beta = 1):
-    # temp = tf.math.sin(10*x)
-    # return (.02*math.exp(.1*x)*math.sin(10*x))
-    # return (x * sigmoid(beta * x))
-    return 0.1*tf.math.exp(0.1*x)*tf.math.sin(10*x)
+    # 0.1*tf.math.exp(0.1*x)*tf.math.sin(10*x) <-- original function that works great (mostly)
+    return 0.0875*tf.math.exp(0.1*x)*tf.math.sin(10*x)
 get_custom_objects().update({'swish': Activation(swish)})
 ticks = np.array(pd.read_csv('tickers.csv')['Tickers'])
+numDaysForward = int(input('Enter the number of days into the future you want to predict:\n'))
+# modelObjects = {}
 for tick in ticks:
     normalized_diff_data = pd.read_csv("normalized_data//normalized_"+tick+".csv")
     #writeFile = open('')
-    train_data = [normalized_diff_data["Open"][0:len(normalized_diff_data)-5],
-    normalized_diff_data["Close"][0:len(normalized_diff_data)-5],
-    normalized_diff_data["High"][0:len(normalized_diff_data)-5],
-    normalized_diff_data["Low"][0:len(normalized_diff_data)-5]]
+    train_data = [normalized_diff_data["Open"][0:len(normalized_diff_data)-numDaysForward],
+    normalized_diff_data["Close"][0:len(normalized_diff_data)-numDaysForward],
+    normalized_diff_data["High"][0:len(normalized_diff_data)-numDaysForward],
+    normalized_diff_data["Low"][0:len(normalized_diff_data)-numDaysForward]]
 
-    test_data = [normalized_diff_data["Open"][5:len(normalized_diff_data)],
-    normalized_diff_data["Close"][5:len(normalized_diff_data)],
-    normalized_diff_data["High"][5:len(normalized_diff_data)],
-    normalized_diff_data["Low"][5:len(normalized_diff_data)]]
+    test_data = [normalized_diff_data["Open"][numDaysForward:len(normalized_diff_data)],
+    normalized_diff_data["Close"][numDaysForward:len(normalized_diff_data)],
+    normalized_diff_data["High"][numDaysForward:len(normalized_diff_data)],
+    normalized_diff_data["Low"][numDaysForward:len(normalized_diff_data)]]
 
     train_data = np.transpose(np.array(train_data))
     test_data = np.transpose(np.array(test_data))
@@ -55,10 +56,14 @@ for tick in ticks:
     model.compile(optimizer=optimizer, loss='mae', metrics=['mse','acc'])
     history = model.fit(train_data, test_data, epochs=15, verbose=1)
 
+    modelFile = open('models//'+tick+'.csv','w')
+    modelFile.write('Model Object Reference\n')
+    modelFile.write(str(model))
     writeFile = open('predicted_data//'+tick+'.csv','w')
     writeFile.write('Predicted Open,Predicted Close,Predicted High,Predicted Low,Actual Open,Actual Close,Actual High,Actual Low\n')
-    
-    rands = random.sample(range(0,len(train_data)),50)
+    predictedFile = open('raw_future_predictions//'+tick+'.csv','w')
+    predictedFile.write('Predicted Open,Predicted Close,Predicted High,Predicted Low\n')
+    rands = random.sample(range(0,len(train_data)),5)
     for b in rands:
 
         print('Tick: ' + tick + ' index value ' + str(b))
@@ -69,6 +74,15 @@ for tick in ticks:
         for a in range(0,3):
             writeFile.write(str(test_data[b][0][a])+',')
         writeFile.write(str(test_data[b][0][3])+'\n')
+    temp = test_data[len(test_data)-numDaysForward:len(test_data)]
+    for i in temp:
+        predict = model.predict(i.reshape(1,1,4))[0][0]
+        for g in range(0,3):
+            predictedFile.write(str(predict[g])+',')
+        predictedFile.write(str(predict[3])+'\n')
+        print(predict)
+    # input('stop')
+    
     # input(tick)
         # print(model.predict(train_data[b].reshape(1,1,4))[0][0])
         # print()
@@ -80,5 +94,5 @@ for tick in ticks:
         # print()
         # print()
         # print()
-
-
+        # 
+# subprocess.run(["python","denormalizer.py"])
