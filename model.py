@@ -11,14 +11,15 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras.backend import sigmoid
 from tensorflow.keras.utils import get_custom_objects
 from tensorflow.keras.layers import Activation
+from tensorflow.keras.optimizers import Adamax
 import tensorflow as tf
 import subprocess
 
-
+#.1375
 
 def swish(x, beta = 1):
     # 0.1*tf.math.exp(0.1*x)*tf.math.sin(10*x) <-- original function that works great (mostly)
-    return 0.1375*tf.math.exp(0.1*x)*tf.math.sin(10*x)
+    return 0.05*tf.math.exp(0.1*x)*tf.math.sin(10*x)
 get_custom_objects().update({'swish': Activation(swish)})
 ticks = np.array(pd.read_csv('tickers.csv')['Tickers'])
 numDaysForward = int(input('Enter the number of days into the future you want to predict:\n'))
@@ -81,9 +82,9 @@ numDaysForward = int(input('Enter the number of days into the future you want to
 # input('end')
 # modelObjects = {}
 for tick in ticks:
-    if(tick == 'aapl'):
-        print('need to skip')
-        continue
+    # if(tick == 'aapl'):
+    #     print('need to skip')
+    #     continue
     normalized_diff_data = pd.read_csv("normalized_data//normalized_"+tick+".csv")
     #writeFile = open('')
     train_data = [normalized_diff_data["Open"][0:len(normalized_diff_data)-numDaysForward],
@@ -110,10 +111,10 @@ for tick in ticks:
     #learning_rate = 0.0005 15 or 10 epochs
     model.add((LSTM(len(train_data),activation='swish',return_sequences=True,input_shape=(1,4))))
     # model.add(Dropout(0.1))
-    model.add((LSTM(750,activation='swish',return_sequences=True)))
-    model.add(Dropout(0.1))
-    model.add((LSTM(300,activation='sigmoid',return_sequences=True)))
-    
+    model.add((LSTM(2000,activation='swish',return_sequences=True)))
+    # model.add(Dropout(0.15))
+    model.add((LSTM(500,activation='sigmoid',return_sequences=True)))
+    #1000 to 250
     model.add(Dense(4))
 
     #lr is 0.001 tanh -> sigmoid 5 epochs
@@ -121,8 +122,8 @@ for tick in ticks:
     optimizer = tf.keras.optimizers.Adam(0.001)
     optimizer.learning_rate.assign(learning_rate)
 
-    model.compile(optimizer=optimizer, loss='mae', metrics=['mse','acc'])
-    history = model.fit(train_data, test_data, epochs=10, verbose=1)
+    model.compile(optimizer="Adamax", loss='mae', metrics=['mse','acc'])
+    history = model.fit(train_data, test_data, epochs=20, verbose=1)
     losses = history.history['loss']
     mses = history.history['mse']
     acc = history.history['acc']
