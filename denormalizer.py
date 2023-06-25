@@ -10,6 +10,7 @@ def denormalizer(rawX,meansArr,stdevArr):
 ticks = list(pd.read_csv('tickers.csv')['Tickers'])
 print(ticks)
 # input(ticks.index('aapl'))
+# ticks = ['aapl']
 for i in range(len(ticks)):
     valLen = len(np.array(pd.read_csv('raw_future_predictions//'+ticks[i]+'.csv')))
     means = np.array((pd.read_csv('means.csv')).transpose()[i][1:5])
