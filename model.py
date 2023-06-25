@@ -87,15 +87,15 @@ for tick in ticks:
     #     continue
     normalized_diff_data = pd.read_csv("normalized_data//normalized_"+tick+".csv")
     #writeFile = open('')
-    train_data = [normalized_diff_data["Open"][0:len(normalized_diff_data)-numDaysForward],
-    normalized_diff_data["Close"][0:len(normalized_diff_data)-numDaysForward],
-    normalized_diff_data["High"][0:len(normalized_diff_data)-numDaysForward],
-    normalized_diff_data["Low"][0:len(normalized_diff_data)-numDaysForward]]
+    train_data = [normalized_diff_data["Open"][0:len(normalized_diff_data)-1],
+    normalized_diff_data["Close"][0:len(normalized_diff_data)-1],
+    normalized_diff_data["High"][0:len(normalized_diff_data)-1],
+    normalized_diff_data["Low"][0:len(normalized_diff_data)-1]]
 
-    test_data = [normalized_diff_data["Open"][numDaysForward:len(normalized_diff_data)],
-    normalized_diff_data["Close"][numDaysForward:len(normalized_diff_data)],
-    normalized_diff_data["High"][numDaysForward:len(normalized_diff_data)],
-    normalized_diff_data["Low"][numDaysForward:len(normalized_diff_data)]]
+    test_data = [normalized_diff_data["Open"][1:len(normalized_diff_data)],
+    normalized_diff_data["Close"][1:len(normalized_diff_data)],
+    normalized_diff_data["High"][1:len(normalized_diff_data)],
+    normalized_diff_data["Low"][1:len(normalized_diff_data)]]
 
     train_data = np.transpose(np.array(train_data))
     test_data = np.transpose(np.array(test_data))
@@ -157,13 +157,25 @@ for tick in ticks:
         for a in range(0,3):
             writeFile.write(str(test_data[b][0][a])+',')
         writeFile.write(str(test_data[b][0][3])+'\n')
-    temp = test_data[len(test_data)-numDaysForward:len(test_data)]
-    for i in temp:
-        predict = model.predict(i.reshape(1,1,4))[0][0]
-        for g in range(0,3):
-            predictedFile.write(str(predict[g])+',')
-        predictedFile.write(str(predict[3])+'\n')
-        print(predict)
+    temp = test_data[len(test_data)-1:len(test_data)]
+    print(model.predict(temp.reshape(1,1,4)))
+    print(temp)
+    aux = model.predict(temp.reshape(1,1,4))
+    predictedFile.write(str(aux[0][0][0])+','+str(aux[0][0][1])+','+str(aux[0][0][2])+','+str(aux[0][0][3])+'\n')
+    print(aux[0][0][0])
+    print(aux[0][0][1])
+
+    for i in range(1,numDaysForward):
+        aux = model.predict(aux.reshape(1,1,4))
+        print(aux)
+    input('stop')
+    
+    # for i in temp:
+    #     predict = model.predict(i.reshape(1,1,4))[0][0]
+    #     for g in range(0,3):
+    #         predictedFile.write(str(predict[g])+',')
+    #     predictedFile.write(str(predict[3])+'\n')
+    #     print(predict)
     # input('end')
     # input('stop')
     
