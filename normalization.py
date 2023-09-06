@@ -7,8 +7,8 @@ def normalizer(means_array,std_array,x_array,ticker):
     #ticker is the ticker that this method needs to normalize
 
     #for windows os: 
-    # normalizedFile = open('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv','w')
-    normalizedFile = open('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv','w')
+    normalizedFile = open('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv','w')
+    # normalizedFile = open('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv','w')
     #open the normalized csv file
     normalizedFile.write('Open,Close,High,Low\n')
     #write headers
@@ -40,8 +40,8 @@ for tick in tickers:
     #iterating through tickers to populate means and stdevs dictionaries
 
     #for windows os: 
-    # data = np.transpose(np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+tick+".csv")))
-    data = np.transpose(np.array(pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+tick+".csv")))
+    data = np.transpose(np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+tick+".csv")))
+    # data = np.transpose(np.array(pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+tick+".csv")))
     #getting data and transposing to make each element a column; this allows us to feed into normalizer method
     aux_mean = []
     aux_std = []
@@ -61,8 +61,8 @@ meansFile.write('ticker,open,close,high,low\n')
 stdevsFile.write('ticker,open,close,high,low\n')
 for tick in tickers:
     #for windows os: 
-    # data = np.transpose(np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+tick+".csv")))
-    data = np.transpose(np.array(pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+tick+".csv")))
+    data = np.transpose(np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//data//'+tick+".csv")))
+    # data = np.transpose(np.array(pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/data/'+tick+".csv")))
     normalizer(means[tick],stdevs[tick],data,tick)
     meansFile.write(tick+','+str(means[tick][0])+','+str(means[tick][1])+','+str(means[tick][2])+','+str(means[tick][3])+'\n')
     stdevsFile.write(tick+','+str(stdevs[tick][0])+','+str(stdevs[tick][1])+','+str(stdevs[tick][2])+','+str(stdevs[tick][3])+'\n')

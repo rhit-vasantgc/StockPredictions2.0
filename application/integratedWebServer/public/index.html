@@ -1,0 +1,59 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <!-- <link rel="stylesheet" 
+            href="https://pyscript.net/alpha/pyscript.css" />
+        <script defer 
+            src="https://pyscript.net/alpha/pyscript.js">
+        </script>
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
+  <title>App Name</title>
+ 
+</head>
+
+<body>
+  <!-- C:\Users\vasantgc\Documents\StockPredictions2.0\predicted_data\aapl.csv -->
+  <div id="data">Data: </div>
+    <nav class="navbar navbar-dark fixed-top">
+      <a class="navbar-brand" href="#">Stock Predictions</a>
+    </nav>
+  <div id="mainPage" class="container page-container">
+  <!-- <input type="file" id="test"> -->
+    Enter symbol:<input type="text" id="symbol">
+
+    <br>
+    <br>
+    <br>
+    <div id="temp">You entered: </div>
+    <br>
+    <br>
+    
+    <div id="scripted">File to read is: </div>
+    <button id="submit" >Submit</button>
+   
+   
+    
+
+  </div>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="scripts/main.js"></script>
+  
+</body>
+
+</html>

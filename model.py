@@ -110,13 +110,14 @@ for tick in ticks:
     # model.add((LSTM(len(train_data),activation='swish',return_sequences=True,input_shape=(1,4))))
     # model.add((LSTM(750,activation='sigmoid',return_sequences=True)))
     #learning_rate = 0.0005 15 or 10 epochs
-    model.add((LSTM(len(train_data)*2,activation=activation,return_sequences=True,input_shape=(1,4))))
-    model.add((LSTM(500*4*2,activation=activation,return_sequences=True)))
+    model.add((LSTM(len(train_data),activation=activation,return_sequences=True,input_shape=(1,4))))
+    model.add((LSTM(500*4,activation=activation,return_sequences=True)))
     # model.add(Dropout(0.1))
     # model.add(Dropout(0.25))
-    model.add((LSTM(125*4*4,activation='sigmoid',return_sequences=True)))
+    model.add((LSTM(125*4,activation='sigmoid',return_sequences=True)))
     #1000 to 250
     #2000 to 500
+    # model.add((LSTM(225,activation='tanh',return_sequences=True)))
     model.add(Dense(4))
 
     #lr is 0.001 tanh -> sigmoid 5 epochs

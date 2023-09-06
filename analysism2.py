@@ -6,8 +6,8 @@ all_tickers = (pd.read_csv('tickers.csv')['Tickers'])
 for ticker in all_tickers:
     print(ticker)
     #for windows os:
-    # data = np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv'))
-    data = np.array(pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv'))
+    data = np.array(pd.read_csv('C://Users//vasantgc//Documents//StockPredictions2.0//normalized_data//normalized_'+ticker+'.csv'))
+    # data = np.array(pd.read_csv('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/normalized_data/normalized_'+ticker+'.csv'))
     
 
     print(data)
@@ -35,8 +35,8 @@ for ticker in all_tickers:
     print(open)
     plt.title(ticker)
     #for windows os: 
-    # plt.savefig('C://Users//vasantgc//Documents//StockPredictions2.0//difference_graphs/'+ticker+'.png')
-    plt.savefig('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/graphs/'+ticker+'.png')
+    plt.savefig('C://Users//vasantgc//Documents//StockPredictions2.0//difference_graphs/'+ticker+'.png')
+    # plt.savefig('/Users/gcvasanta/Desktop/BetterStockPredictor/StockPredictions2.0/graphs/'+ticker+'.png')
     # plt.show()
 
 
